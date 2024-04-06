@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>HW8</title>
+    </head>
+    <body>
+        <p class="super_element">Привет</p>
+        <img src="https://placeimg.com/50/50/animals" alt="" />
+        <img src="https://placeimg.com/50/50/arch" alt="" />
+        <img src="https://placeimg.com/50/50/nature" alt="" />
+        <img src="https://placeimg.com/50/50/people" alt="" />
+        <img src="https://placeimg.com/50/50/tech" alt="" />
+        <img src="https://placeimg.com/50/50/tech/grayscale" alt="" />
+        <img src="https://placeimg.com/50/50/tech/sepia" alt="" />
+        <br />
+        <button>Кнопка</button>
+        <button class="super_element">Кнопка с классом btn</button>
+        <button>Кнопка</button>
+        <br />
+        <textarea></textarea>
+        <br />
+        <ul>
+            <li>
+                <button>Кнопка 1</button>
+            </li>
+            <li>
+                <button>Кнопка 2</button>
+            </li>
+            <li>
+                <button>Кнопка 3</button>
+            </li>
+            <li>
+                <button>Кнопка 4</button>
+            </li>
+        </ul>
+    </body>
+    <script>
+        // 1. Необходимо вывести сообщение в консоль "все теги прогрузились", когда все теги будут созданы браузером.
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("все теги прогрузились");
+        });
+        // 2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все ресурсы страницы будут загружены.
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log("страница загрузилась");
+        });
+        // 3. При клике на какой-либо тег на странице в консоль должно выводиться сообщение наподобие:
+        // - Класс "super_element" присутствует в элементе "div".
+        // - сообщение должно определять присутствует или отсутствует класс "super_element"
+        // - у элемента, а также выводить в нижнем регистре верный тег в данной строке, по
+        // - которому был совершен клик.
+        // - Необходимо использовать делегирование.
+
+        document.addEventListener("click", function (event) {
+            if (event.target.tagName) {
+                const classes = Array.from(event.target.classList);
+
+                const hasSuperElementClass = classes.includes("super_element");
+
+                const tagName = event.target.tagName.toLowerCase();
+
+                const message = hasSuperElementClass
+                    ? `Класс "super_element" присутствует в элементе "${tagName}".`
+                    : `Класс "super_element" отсутствует в элементе "${tagName}".`;
+                console.log(message);
+            }
+        });
+        // 4. Сделайте, чтобы при наведении на textarea в консоли появлялось сообщение: "Вы навели на textarea."
+        const textareaEl = document.querySelector("textarea");
+        textareaEl.addEventListener("mouseover", () => {
+            console.log("Вы навели на textarea.");
+        });
+        // 5. Необходимо повесить событие клика на тег ul. В обработчике события в консоль необходимо выводить текст, который записан внутри элемента кнопки, по которой был произведен клик. Если клик был не по кнопке, то ничего выводить не нужно. Необходимо использовать делегирование.
+
+        const ulElem = document.querySelector("ul");
+        ulElem.addEventListener("click", function (event) {
+            if (event.target.tagName == "BUTTON") {
+                const buttonText = event.target.textContent;
+                console.log(buttonText);
+            }
+        });
+        // 6. Вопрос: Почему в console.log пишется сначала текст из 5 задания и только потом выводится текст из 3 задания, если мы кликаем по кнопкам в ul? Ответ необходимо написать здесь же, под этим комментарием, своими словами.
+        // возможно из-за разного порядка выполнения обработчиков события,который определён браузером,могу ошибаться,буду рад услышать более правильный и развёрнутый ответ от Вас
+        // 7. С помощью JS необходимо изменить цвет заднего фона каждого второго тега li.
+        const liElems=document.querySelectorAll("li")
+        for (let i = 1; i < liElems.length; i+=2) {
+            liElems[i].style.backgroundColor="red"
+        }
+    </script>
+</html>
